@@ -38,14 +38,36 @@
       margin-bottom: 24px;
     }
 
+    .profile-avatar {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 16px;
+}
+
     .profile-pic {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #00c9ff;
-      margin-bottom: 16px;
-      box-shadow: 0 0 12px rgba(0, 201, 255, 0.4);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #00c9ff;
+    box-shadow: 0 0 12px rgba(0, 201, 255, 0.4);
+    display: block;
+    }
+
+    .profile-initial {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00c9ff, #00ffcc);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 36px;
+    border: 3px solid #00c9ff;
+    box-shadow: 0 0 12px rgba(0, 201, 255, 0.4);
     }
 
     .profile-name {
@@ -129,16 +151,23 @@
   <div class="container">
     <!-- Foto Profil -->
     <div class="profile">
-      <img
-        src="tapNFC.png" <!-- GANTI DENGAN URL FOTO PROFIL ANDA -->
+  <!-- Profil Image atau Inisial -->
+  <div class="profile-avatar" id="profileAvatar">
+        <img
+        src="tapNFC.png" <!-- GANTI DENGAN URL FOTO ANDA -->
         alt="tapNFC.id"
         class="profile-pic"
-        onerror="this.src='https://via.placeholder.com/100/00c9ff/ffffff?text=NFC'"
-      />
-      <h1 class="profile-name">@tapNFC.id</h1>
-      <p class="bio">
+        onerror="showInitialFallback()"
+        />
+        <div class="profile-initial" id="profileInitial" style="display: none;">
+        T
+        </div>
+    </div>
+
+    <h1 class="profile-name">@tapNFC.id</h1>
+    <p class="bio">
         🔮 Jual gantungan kunci NFC custom! Bisa cetak logo, nama, atau bentuk unik sesuai keinginanmu. Tap & akses apapun dalam satu sentuhan!
-      </p>
+    </p>
     </div>
 
     <!-- Link Sosial Media -->
@@ -165,6 +194,23 @@
   </div>
 
   <script>
+    function showInitialFallback() {
+    const img = document.querySelector('.profile-pic');
+    const initial = document.getElementById('profileInitial');
+    
+    // Sembunyikan gambar
+    img.style.display = 'none';
+    
+    // Tampilkan inisial
+    initial.style.display = 'flex';
+    }
+
+    // Opsional: Ambil inisial dari nama akun (misal: "@tapNFC.id" → "T")
+    document.addEventListener('DOMContentLoaded', () => {
+    const name = "@tapNFC.id";
+    const firstChar = name.charAt(1).toUpperCase(); // ambil 't' → 'T'
+    document.getElementById('profileInitial').textContent = firstChar;
+    });
     // Opsional: log saat halaman dimuat
     console.log("💡 Terima kasih telah mengunjungi tapNFC.id – NFC Custom Gantungan Kunci!");
   </script>
